@@ -28,7 +28,33 @@ const getAnimalById = async (req, res) => {
   });
 };
 
+// Create a new animal
+const createAnimal = async (req, res) => {
+  const animal = {
+    name: req.body.name,
+    species: req.body.species,
+    lifespan: req.body.lifespan,
+    continent: req.body.continent,
+    description: req.body.description,
+  };
+
+  const response = await mongodb
+    .getDb()
+    .db("animals")
+    .collection("animals")
+    .insertOne(animal);
+
+  if (response.acknowledged) {
+    res.status(201).json(response);
+  } else {
+    res
+      .status(500)
+      .json(response.error || "Some error occurred while creating the animal.");
+  }
+};
+
 module.exports = {
   getAllAnimals,
   getAnimalById,
+  createAnimal,
 };

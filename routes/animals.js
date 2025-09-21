@@ -7,4 +7,6 @@ router.get("/", useController.getAllAnimals);
 
 router.get("/:id", useController.getAnimalById);
 
+router.post("/", useController.createAnimal);
+
 module.exports = router;

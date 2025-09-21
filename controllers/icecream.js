@@ -28,7 +28,36 @@ const getFlavorById = async (req, res) => {
   });
 };
 
+// Create a new ice cream flavor
+const createFlavor = async (req, res) => {
+  const icecream = {
+    flavor: req.body.flavor,
+    price: req.body.price,
+    calories: req.body.calories,
+    isVegan: req.body.isVegan,
+    rating: req.body.rating,
+  };
+
+  const response = await mongodb
+    .getDb()
+    .db("icecream")
+    .collection("icecream")
+    .insertOne(icecream);
+
+  if (response.acknowledged) {
+    res.status(201).json(response);
+  } else {
+    res
+      .status(500)
+      .json(
+        response.error ||
+          "Some error occurred while creating the ice cream flavor."
+      );
+  }
+};
+
 module.exports = {
   getAllFlavors,
   getFlavorById,
+  createFlavor,
 };

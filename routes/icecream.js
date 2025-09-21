@@ -7,4 +7,6 @@ router.get("/", useController.getAllFlavors);
 
 router.get("/:id", useController.getFlavorById);
 
+router.post("/", useController.createFlavor);
+
 module.exports = router;
