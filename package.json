@@ -1,0 +1,36 @@
+{
+  "name": "cse341project2",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Borgesfacundo/cse341project2#readme",
+  "bugs": {
+    "url": "https://github.com/Borgesfacundo/cse341project2/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Borgesfacundo/cse341project2.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "dotenv": "^17.2.2",
+    "eslint": "^9.36.0",
+    "express": "^5.1.0",
+    "gitignore": "^0.7.0",
+    "mongodb": "^6.20.0",
+    "mongoose": "^8.18.1",
+    "nodemon": "^3.1.10",
+    "swagger-ui-express": "^5.0.1",
+    "validatorjs": "^3.22.1"
+  },
+  "devDependencies": {
+    "swagger-autogen": "^2.23.7"
+  }
+}
