@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 // Define the route for the root URL
 app.use("/", routes);
 
-// Middleware de manejo de errores (DEBE IR AL FINAL)
+// Middleware for handling 404 and other errors
 app.use(notFoundHandler);
 app.use(globalErrorHandler);
 
