@@ -5,8 +5,8 @@ const doc = {
     title: "Animals and Ice Cream API",
     description: "API for managing animals and ice cream flavors",
   },
-  host: "localhost:3000",
-  schemes: ["http", "https"],
+  host: "cse341project2-ckvu.onrender.com",
+  schemes: ["https", "http"],
 };
 
 const outputFile = "./swagger-output.json";

@@ -5,12 +5,9 @@
     "description": "API for managing animals and ice cream flavors",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "cse341project2-ckvu.onrender.com",
   "basePath": "/",
-  "schemes": [
-    "http",
-    "https"
-  ],
+  "schemes": ["https", "http"],
   "paths": {
     "/": {
       "get": {
@@ -22,25 +19,11 @@
         }
       }
     },
-    "/api-docs": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/animals/": {
       "get": {
-        "tags": [
-          "Animals"
-        ],
+        "tags": ["Animals"],
         "description": "Get all animals from the database",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -48,9 +31,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Animals"
-        ],
+        "tags": ["Animals"],
         "description": "Create a new animal",
         "parameters": [
           {
@@ -90,13 +71,9 @@
     },
     "/animals/{id}": {
       "get": {
-        "tags": [
-          "Animals"
-        ],
+        "tags": ["Animals"],
         "description": "Get a specific animal by ID",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -112,9 +89,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Animals"
-        ],
+        "tags": ["Animals"],
         "description": "Update an existing animal by ID",
         "parameters": [
           {
@@ -158,9 +133,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Animals"
-        ],
+        "tags": ["Animals"],
         "description": "Delete an animal by ID",
         "parameters": [
           {
@@ -182,13 +155,9 @@
     },
     "/icecream/": {
       "get": {
-        "tags": [
-          "Ice Cream"
-        ],
+        "tags": ["Ice Cream"],
         "description": "Get all ice cream flavors from the database",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -196,9 +165,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Ice Cream"
-        ],
+        "tags": ["Ice Cream"],
         "description": "Create a new ice cream flavor",
         "parameters": [
           {
@@ -238,13 +205,9 @@
     },
     "/icecream/{id}": {
       "get": {
-        "tags": [
-          "Ice Cream"
-        ],
+        "tags": ["Ice Cream"],
         "description": "Get a specific ice cream flavor by ID",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -260,9 +223,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Ice Cream"
-        ],
+        "tags": ["Ice Cream"],
         "description": "Update an existing ice cream flavor by ID",
         "parameters": [
           {
@@ -306,9 +267,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Ice Cream"
-        ],
+        "tags": ["Ice Cream"],
         "description": "Delete an ice cream flavor by ID",
         "parameters": [
           {
