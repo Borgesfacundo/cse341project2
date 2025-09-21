@@ -9,4 +9,8 @@ router.get("/:id", useController.getFlavorById);
 
 router.post("/", useController.createFlavor);
 
+router.put("/:id", useController.updateFlavor);
+
+router.delete("/:id", useController.deleteFlavor);
+
 module.exports = router;

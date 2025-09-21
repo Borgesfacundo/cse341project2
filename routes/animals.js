@@ -9,4 +9,8 @@ router.get("/:id", useController.getAnimalById);
 
 router.post("/", useController.createAnimal);
 
+router.put("/:id", useController.updateAnimal);
+
+router.delete("/:id", useController.deleteAnimal);
+
 module.exports = router;

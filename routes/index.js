@@ -2,16 +2,12 @@ const express = require("express");
 const router = express.Router();
 const mongodb = require("../data/database");
 
-const getData = async (req, res) => {
-  const result = await mongodb.getDb().db().collection("contacts").find();
-  result.toArray().then((lists) => {
-    res.setHeader("Content-Type", "application/json");
-    res.status(200).json(lists);
-  });
-};
+//swagger documentation route
+router.use("/", require("./swagger"));
 
 //Initial message at the root route
 router.get("/", (req, res) => {
+  //#Swagger.tags = ['Hello World']
   res.send("Hello, welcome to the API");
 });
 
