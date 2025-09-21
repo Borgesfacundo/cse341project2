@@ -58,6 +58,7 @@ const validateAnimal = [
       "Australia",
       "Antarctica",
       "Arctic",
+      "World",
     ])
     .withMessage("Continent must be a valid continent name"),
 
