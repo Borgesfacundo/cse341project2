@@ -1,8 +1,9 @@
 const mongodb = require("../data/database");
 const ObjectId = require("mongodb").ObjectId;
+const { asyncHandler } = require("../middleware/simpleErrorHandler");
 
 // Get all animals
-const getAllAnimals = async (req, res) => {
+const getAllAnimals = asyncHandler(async (req, res) => {
   // #swagger.tags = ['Animals']
   // #swagger.description = 'Get all animals from the database'
   const result = await mongodb
@@ -10,14 +11,14 @@ const getAllAnimals = async (req, res) => {
     .db("animals")
     .collection("animals")
     .find();
-  result.toArray().then((lists) => {
-    res.setHeader("Content-Type", "application/json");
-    res.status(200).json(lists);
-  });
-};
+
+  const animals = await result.toArray();
+  res.setHeader("Content-Type", "application/json");
+  res.status(200).json(animals);
+});
 
 // Get a specific animal by ID
-const getAnimalById = async (req, res) => {
+const getAnimalById = asyncHandler(async (req, res) => {
   // #swagger.tags = ['Animals']
   // #swagger.description = 'Get a specific animal by ID'
   const animalId = new ObjectId(req.params.id);
@@ -25,15 +26,21 @@ const getAnimalById = async (req, res) => {
     .getDb()
     .db("animals")
     .collection("animals")
-    .find({ _id: animalId });
-  result.toArray().then((lists) => {
-    res.setHeader("Content-Type", "application/json");
-    res.status(200).json(lists[0]);
-  });
-};
+    .findOne({ _id: animalId });
+
+  if (!result) {
+    return res.status(404).json({
+      error: "Animal not found",
+      message: "No animal found with the provided ID",
+    });
+  }
+
+  res.setHeader("Content-Type", "application/json");
+  res.status(200).json(result);
+});
 
 // Create a new animal
-const createAnimal = async (req, res) => {
+const createAnimal = asyncHandler(async (req, res) => {
   // #swagger.tags = ['Animals']
   // #swagger.description = 'Create a new animal'
   const animal = {
@@ -51,16 +58,20 @@ const createAnimal = async (req, res) => {
     .insertOne(animal);
 
   if (response.acknowledged) {
-    res.status(201).json(response);
+    res.status(201).json({
+      success: true,
+      message: "Animal created successfully",
+      id: response.insertedId,
+    });
   } else {
     res
       .status(500)
       .json(response.error || "Some error occurred while creating the animal.");
   }
-};
+});
 
 // Update an animal by ID
-const updateAnimal = async (req, res) => {
+const updateAnimal = asyncHandler(async (req, res) => {
   // #swagger.tags = ['Animals']
   // #swagger.description = 'Update an existing animal by ID'
   const animalId = new ObjectId(req.params.id);
@@ -79,16 +90,25 @@ const updateAnimal = async (req, res) => {
     .updateOne({ _id: animalId }, { $set: animal });
 
   if (response.modifiedCount > 0) {
-    res.status(204).send();
+    res.status(200).json({
+      success: true,
+      message: "Animal updated successfully",
+    });
+  } else if (response.matchedCount === 0) {
+    res.status(404).json({
+      error: "Animal not found",
+      message: "No animal found with the provided ID",
+    });
   } else {
-    res
-      .status(500)
-      .json(response.error || "Some error occurred while updating the animal.");
+    res.status(500).json({
+      error: "Update failed",
+      message: "Some error occurred while updating the animal.",
+    });
   }
-};
+});
 
 // Delete an animal by ID
-const deleteAnimal = async (req, res) => {
+const deleteAnimal = asyncHandler(async (req, res) => {
   // #swagger.tags = ['Animals']
   // #swagger.description = 'Delete an animal by ID'
   const animalId = new ObjectId(req.params.id);
@@ -100,13 +120,17 @@ const deleteAnimal = async (req, res) => {
     .deleteOne({ _id: animalId });
 
   if (response.deletedCount > 0) {
-    res.status(204).send();
+    res.status(200).json({
+      success: true,
+      message: "Animal deleted successfully",
+    });
   } else {
-    res
-      .status(500)
-      .json(response.error || "Some error occurred while deleting the animal.");
+    res.status(404).json({
+      error: "Animal not found",
+      message: "No animal found with the provided ID",
+    });
   }
-};
+});
 
 module.exports = {
   getAllAnimals,

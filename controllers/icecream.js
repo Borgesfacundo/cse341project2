@@ -1,8 +1,9 @@
 const mongodb = require("../data/database");
 const ObjectId = require("mongodb").ObjectId;
+const { asyncHandler } = require("../middleware/simpleErrorHandler");
 
 // Get all ice cream flavors
-const getAllFlavors = async (req, res) => {
+const getAllFlavors = asyncHandler(async (req, res) => {
   // #swagger.tags = ['Ice Cream']
   // #swagger.description = 'Get all ice cream flavors from the database'
   const result = await mongodb
@@ -10,14 +11,14 @@ const getAllFlavors = async (req, res) => {
     .db("icecream")
     .collection("icecream")
     .find();
-  result.toArray().then((lists) => {
-    res.setHeader("Content-Type", "application/json");
-    res.status(200).json(lists);
-  });
-};
+
+  const flavors = await result.toArray();
+  res.setHeader("Content-Type", "application/json");
+  res.status(200).json(flavors);
+});
 
 // Get a specific ice cream flavor by ID
-const getFlavorById = async (req, res) => {
+const getFlavorById = asyncHandler(async (req, res) => {
   // #swagger.tags = ['Ice Cream']
   // #swagger.description = 'Get a specific ice cream flavor by ID'
   const flavorId = new ObjectId(req.params.id);
@@ -25,15 +26,21 @@ const getFlavorById = async (req, res) => {
     .getDb()
     .db("icecream")
     .collection("icecream")
-    .find({ _id: flavorId });
-  result.toArray().then((lists) => {
-    res.setHeader("Content-Type", "application/json");
-    res.status(200).json(lists[0]);
-  });
-};
+    .findOne({ _id: flavorId });
+
+  if (!result) {
+    return res.status(404).json({
+      error: "Ice cream flavor not found",
+      message: "No ice cream flavor found with the provided ID",
+    });
+  }
+
+  res.setHeader("Content-Type", "application/json");
+  res.status(200).json(result);
+});
 
 // Create a new ice cream flavor
-const createFlavor = async (req, res) => {
+const createFlavor = asyncHandler(async (req, res) => {
   // #swagger.tags = ['Ice Cream']
   // #swagger.description = 'Create a new ice cream flavor'
   const icecream = {
@@ -51,19 +58,21 @@ const createFlavor = async (req, res) => {
     .insertOne(icecream);
 
   if (response.acknowledged) {
-    res.status(201).json(response);
+    res.status(201).json({
+      success: true,
+      message: "Ice cream flavor created successfully",
+      id: response.insertedId,
+    });
   } else {
-    res
-      .status(500)
-      .json(
-        response.error ||
-          "Some error occurred while creating the ice cream flavor."
-      );
+    res.status(500).json({
+      error: "Creation failed",
+      message: "Some error occurred while creating the ice cream flavor.",
+    });
   }
-};
+});
 
 // Update an ice cream flavor by ID
-const updateFlavor = async (req, res) => {
+const updateFlavor = asyncHandler(async (req, res) => {
   // #swagger.tags = ['Ice Cream']
   // #swagger.description = 'Update an existing ice cream flavor by ID'
   const flavorId = new ObjectId(req.params.id);
@@ -82,19 +91,25 @@ const updateFlavor = async (req, res) => {
     .updateOne({ _id: flavorId }, { $set: icecream });
 
   if (response.modifiedCount > 0) {
-    res.status(204).send();
+    res.status(200).json({
+      success: true,
+      message: "Ice cream flavor updated successfully",
+    });
+  } else if (response.matchedCount === 0) {
+    res.status(404).json({
+      error: "Ice cream flavor not found",
+      message: "No ice cream flavor found with the provided ID",
+    });
   } else {
-    res
-      .status(500)
-      .json(
-        response.error ||
-          "Some error occurred while updating the ice cream flavor."
-      );
+    res.status(500).json({
+      error: "Update failed",
+      message: "Some error occurred while updating the ice cream flavor.",
+    });
   }
-};
+});
 
 // Delete an ice cream flavor by ID
-const deleteFlavor = async (req, res) => {
+const deleteFlavor = asyncHandler(async (req, res) => {
   // #swagger.tags = ['Ice Cream']
   // #swagger.description = 'Delete an ice cream flavor by ID'
   const flavorId = new ObjectId(req.params.id);
@@ -106,16 +121,17 @@ const deleteFlavor = async (req, res) => {
     .deleteOne({ _id: flavorId });
 
   if (response.deletedCount > 0) {
-    res.status(204).send();
+    res.status(200).json({
+      success: true,
+      message: "Ice cream flavor deleted successfully",
+    });
   } else {
-    res
-      .status(500)
-      .json(
-        response.error ||
-          "Some error occurred while deleting the ice cream flavor."
-      );
+    res.status(404).json({
+      error: "Ice cream flavor not found",
+      message: "No ice cream flavor found with the provided ID",
+    });
   }
-};
+});
 
 module.exports = {
   getAllFlavors,
