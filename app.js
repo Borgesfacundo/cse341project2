@@ -3,7 +3,7 @@ const app = express();
 
 const bodyParser = require("body-parser");
 const mongoClient = require("mongodb").MongoClient;
-const mongodb = require("./db/connect");
+const mongodb = require("./data/database");
 const routes = require("./routes");
 
 const port = process.env.PORT || 3000;
