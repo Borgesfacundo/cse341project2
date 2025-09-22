@@ -2,4 +2,3 @@ node_modules
 .env
 data/animals.json
 data/icecream.json
-routes.rest

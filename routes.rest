@@ -1,0 +1,176 @@
+### ====================================
+### API TESTING - Animals & Ice Cream CRUD
+### ====================================
+
+### Variables
+@baseUrl = http://localhost:3000
+
+### ====================================
+### 🏠 ROOT ENDPOINT
+### ====================================
+
+### GET Root - Welcome message
+GET {{baseUrl}}/
+
+### ====================================
+### 🐾 ANIMALS CRUD OPERATIONS
+### ====================================
+
+### GET All Animals
+GET {{baseUrl}}/animals
+
+### GET Animal by ID (Replace with actual ID from database)
+GET {{baseUrl}}/animals/68d0781e6a3334046f96281e
+
+### POST Create New Animal
+POST {{baseUrl}}/animals
+Content-Type: application/json
+
+{
+  "name": "Bengal Tiger",
+  "species": "Panthera tigris tigris",
+  "lifespan": "8-10 years",
+  "continent": "Asia",
+  "description": "Magnificent striped big cat found in India and Bangladesh"
+}
+
+### PUT Update Animal (Replace with actual ID from database)
+PUT {{baseUrl}}/animals/68d07f27f1ecb375aa0f166d
+Content-Type: application/json
+
+{
+  "name": "Siberian Tigera",
+  "species": "Panthera tigris altaica",
+  "lifespan": "10-15 years",
+  "continent": "Asia",
+  "description": "The largest living cat subspecies, found in eastern Russia"
+}
+
+### DELETE Animal (Replace with actual ID from database)
+DELETE {{baseUrl}}/animals/68d07f27f1ecb375aa0f166d
+
+### ====================================
+### 🍦 ICE CREAM CRUD OPERATIONS
+### ====================================
+
+### GET All Ice Cream Flavors
+GET {{baseUrl}}/icecream
+
+### GET Ice Cream by ID (Replace with actual ID from database)
+GET {{baseUrl}}/icecream/68d07f94f1ecb375aa0f166e
+
+### POST Create New Ice Cream Flavor
+POST {{baseUrl}}/icecream
+Content-Type: application/json
+
+{
+  "flavor": "Rocky Road",
+  "price": 4.75,
+  "calories": 320,
+  "isVegan": false,
+  "rating": 4.3
+}
+
+### PUT Update Ice Cream Flavor (Replace with actual ID from database)
+PUT {{baseUrl}}/icecream/68d07f94f1ecb375aa0f166e
+Content-Type: application/json
+
+{
+  "flavor": "Double Chocolate Fudge",
+  "price": 5.25,
+  "calories": 350,
+  "isVegan": false,
+  "rating": 4.8
+}
+
+### DELETE Ice Cream Flavor (Replace with actual ID from database)
+DELETE {{baseUrl}}/icecream/68d07f94f1ecb375aa0f166e
+
+
+### ====================================
+### 🌐 PRODUCTION SERVER TESTS
+### ====================================
+
+### Variables for Production
+@prodUrl = https://cse341project2-ckvu.onrender.com
+
+### ====================================
+### 🏠 ROOT ENDPOINT - PRODUCTION
+### ====================================
+
+### GET Root - Welcome message (Production)
+GET {{prodUrl}}/
+
+### ====================================
+### 🐾 ANIMALS CRUD OPERATIONS - PRODUCTION
+### ====================================
+
+### GET All Animals (Production)
+GET {{prodUrl}}/animals
+
+### GET Animal by ID (Production) - Replace with actual ID from database
+GET {{prodUrl}}/animals/68d0781e6a3334046f96281e
+
+### POST Create New Animal (Production)
+POST {{prodUrl}}/animals
+Content-Type: application/json
+
+{
+  "name": "African Elephant",
+  "species": "Loxodonta africana",
+  "lifespan": "60-70 years",
+  "continent": "Africa",
+  "description": "The largest land mammal with distinctive large ears and long trunk"
+}
+
+### PUT Update Animal (Production) - Replace with actual ID from database
+PUT {{prodUrl}}/animals/68d07f27f1ecb375aa0f166d
+Content-Type: application/json
+
+{
+  "name": "African Bush Elephant",
+  "species": "Loxodonta africana",
+  "lifespan": "60-70 years",
+  "continent": "Africa",
+  "description": "The largest terrestrial animal, known for its intelligence and social behavior"
+}
+
+### DELETE Animal (Production) - Replace with actual ID from database
+DELETE {{prodUrl}}/animals/68d07f27f1ecb375aa0f166d
+
+### ====================================
+### 🍦 ICE CREAM CRUD OPERATIONS - PRODUCTION
+### ====================================
+
+### GET All Ice Cream Flavors (Production)
+GET {{prodUrl}}/icecream
+
+### GET Ice Cream by ID (Production) - Replace with actual ID from database
+GET {{prodUrl}}/icecream/68d07f94f1ecb375aa0f166e
+
+### POST Create New Ice Cream Flavor (Production)
+POST {{prodUrl}}/icecream
+Content-Type: application/json
+
+{
+  "flavor": "Cookies and Cream",
+  "price": 4.99,
+  "calories": 290,
+  "isVegan": false,
+  "rating": 4.6
+}
+
+### PUT Update Ice Cream Flavor (Production) - Replace with actual ID from database
+PUT {{prodUrl}}/icecream/68d07f94f1ecb375aa0f166e
+Content-Type: application/json
+
+{
+  "flavor": "Oreo Cookies and Cream",
+  "price": 5.49,
+  "calories": 310,
+  "isVegan": false,
+  "rating": 4.9
+}
+
+### DELETE Ice Cream Flavor (Production) - Replace with actual ID from database
+DELETE {{prodUrl}}/icecream/68d07f94f1ecb375aa0f166e
