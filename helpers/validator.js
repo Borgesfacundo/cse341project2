@@ -115,6 +115,38 @@ const validateIceCream = [
     .withMessage("Rating must be a number between 0.0 and 5.0")
     .toFloat(),
 
+  body("ingredients")
+    .notEmpty()
+    .withMessage("Ingredients is required")
+    .isArray({ min: 1, max: 10 })
+    .withMessage("Ingredients must be an array with 1 to 10 items")
+    .custom((ingredients) => {
+      if (
+        !ingredients.every(
+          (ingredient) =>
+            typeof ingredient === "string" && ingredient.trim().length > 0
+        )
+      ) {
+        throw new Error("All ingredients must be non-empty strings");
+      }
+      return true;
+    }),
+
+  body("availableSize")
+    .notEmpty()
+    .withMessage("Available size is required")
+    .isArray({ min: 1, max: 5 })
+    .withMessage("Available size must be an array with 1 to 5 items")
+    .custom((sizes) => {
+      const validSizes = ["small", "medium", "large", "family", "extra-large"];
+      if (!sizes.every((size) => validSizes.includes(size))) {
+        throw new Error(
+          "Available sizes must be: small, medium, large, family, or extra-large"
+        );
+      }
+      return true;
+    }),
+
   handleValidationErrors,
 ];
 
@@ -219,6 +251,45 @@ const validateIceCreamUpdate = [
     .isFloat({ min: 0.0, max: 5.0 })
     .withMessage("Rating must be a number between 0.0 and 5.0")
     .toFloat(),
+
+  body("ingredients")
+    .optional()
+    .isArray({ min: 1, max: 10 })
+    .withMessage("Ingredients must be an array with 1 to 10 items")
+    .custom((ingredients) => {
+      if (
+        ingredients &&
+        !ingredients.every(
+          (ingredient) =>
+            typeof ingredient === "string" && ingredient.trim().length > 0
+        )
+      ) {
+        throw new Error("All ingredients must be non-empty strings");
+      }
+      return true;
+    }),
+
+  body("availableSize")
+    .optional()
+    .isArray({ min: 1, max: 5 })
+    .withMessage("Available size must be an array with 1 to 5 items")
+    .custom((sizes) => {
+      if (sizes) {
+        const validSizes = [
+          "small",
+          "medium",
+          "large",
+          "family",
+          "extra-large",
+        ];
+        if (!sizes.every((size) => validSizes.includes(size))) {
+          throw new Error(
+            "Available sizes must be: small, medium, large, family, or extra-large"
+          );
+        }
+      }
+      return true;
+    }),
 
   handleValidationErrors,
 ];
