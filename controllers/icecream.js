@@ -49,6 +49,8 @@ const createFlavor = asyncHandler(async (req, res) => {
     calories: req.body.calories,
     isVegan: req.body.isVegan,
     rating: req.body.rating,
+    ingredients: req.body.ingredients,
+    availableSize: req.body.availableSize,
   };
 
   const response = await mongodb
@@ -82,6 +84,8 @@ const updateFlavor = asyncHandler(async (req, res) => {
     calories: req.body.calories,
     isVegan: req.body.isVegan,
     rating: req.body.rating,
+    ingredients: req.body.ingredients,
+    availableSize: req.body.availableSize,
   };
 
   const response = await mongodb

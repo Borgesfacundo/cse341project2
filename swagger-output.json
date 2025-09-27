@@ -266,6 +266,12 @@
                 },
                 "rating": {
                   "example": "any"
+                },
+                "ingredients": {
+                  "example": "any"
+                },
+                "availableSize": {
+                  "example": "any"
                 }
               }
             }
@@ -341,6 +347,12 @@
                   "example": "any"
                 },
                 "rating": {
+                  "example": "any"
+                },
+                "ingredients": {
+                  "example": "any"
+                },
+                "availableSize": {
                   "example": "any"
                 }
               }
