@@ -7,7 +7,10 @@
   },
   "host": "cse341project2-ckvu.onrender.com",
   "basePath": "/",
-  "schemes": ["https", "http"],
+  "schemes": [
+    "https",
+    "http"
+  ],
   "paths": {
     "/": {
       "get": {
@@ -19,11 +22,55 @@
         }
       }
     },
+    "/github/callback": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/login": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api-docs": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/animals/": {
       "get": {
-        "tags": ["Animals"],
+        "tags": [
+          "Animals"
+        ],
         "description": "Get all animals from the database",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -31,7 +78,9 @@
         }
       },
       "post": {
-        "tags": ["Animals"],
+        "tags": [
+          "Animals"
+        ],
         "description": "Create a new animal",
         "parameters": [
           {
@@ -63,6 +112,9 @@
           "201": {
             "description": "Created"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -71,9 +123,13 @@
     },
     "/animals/{id}": {
       "get": {
-        "tags": ["Animals"],
+        "tags": [
+          "Animals"
+        ],
         "description": "Get a specific animal by ID",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -85,11 +141,16 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
       "put": {
-        "tags": ["Animals"],
+        "tags": [
+          "Animals"
+        ],
         "description": "Update an existing animal by ID",
         "parameters": [
           {
@@ -124,8 +185,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -133,7 +200,9 @@
         }
       },
       "delete": {
-        "tags": ["Animals"],
+        "tags": [
+          "Animals"
+        ],
         "description": "Delete an animal by ID",
         "parameters": [
           {
@@ -144,20 +213,27 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
     },
     "/icecream/": {
       "get": {
-        "tags": ["Ice Cream"],
+        "tags": [
+          "Ice Cream"
+        ],
         "description": "Get all ice cream flavors from the database",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -165,7 +241,9 @@
         }
       },
       "post": {
-        "tags": ["Ice Cream"],
+        "tags": [
+          "Ice Cream"
+        ],
         "description": "Create a new ice cream flavor",
         "parameters": [
           {
@@ -197,6 +275,9 @@
           "201": {
             "description": "Created"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -205,9 +286,13 @@
     },
     "/icecream/{id}": {
       "get": {
-        "tags": ["Ice Cream"],
+        "tags": [
+          "Ice Cream"
+        ],
         "description": "Get a specific ice cream flavor by ID",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -219,11 +304,16 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
       "put": {
-        "tags": ["Ice Cream"],
+        "tags": [
+          "Ice Cream"
+        ],
         "description": "Update an existing ice cream flavor by ID",
         "parameters": [
           {
@@ -258,8 +348,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -267,7 +363,9 @@
         }
       },
       "delete": {
-        "tags": ["Ice Cream"],
+        "tags": [
+          "Ice Cream"
+        ],
         "description": "Delete an ice cream flavor by ID",
         "parameters": [
           {
@@ -278,11 +376,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
